@@ -1,0 +1,68 @@
+
+check for graphical interface
+ls /usr/bin/*session
+type Xorg
+
+Creating groups:
+sudo groupadd "grpname"
+sudo groupdel "grpname"
+getent group
+
+Creating user:
+cut -d: -f1 /etc/passwd //shows list with all users
+sudo adduser "username"
+sudo deluser "username"
+
+Adding user to sudo group:
+su -
+usermod -aG sudo "username"
+sudo usermod -aG "grpname" "unsername"
+
+Deleting user from group:
+sudo deluser "username" "grpname"
+
+check:getent group sudo //checks if user was added & what is inside the group
+
+Give user sudo rights:
+sudo visudo
+"username" ALL=(ALL) ALL
+
+Installing things:
+apt-get update -y
+apt-get upgrade -y //just to be sure everything is up to date we do both
+apt-get install "name" -y || sudo apt-get install "name"
+
+SSH status check:
+sudo systemctl status ssh
+(sudo) service ssh restart //restart and check if the time or date changed, I guess
+
+Firewallcheck:
+sudo ufw status numbered
+
+Configure ufw rules:
+sudo ufw allow ssh || 4242
+sudo ufw delete "numbertodelete"
+
+Add user to ssh-port:
+ssh "username"@127.0.0.1 -p 4242
+
+Password expiration file:
+sudo vim /etc/login.defs //PASS_MAX_DAYS && PASS_MIN_DAYS && PASS_WARN_AGE
+
+Check password rules:
+chage -l "new_username" //must be in root
+
+Hostname:
+hostnamectl //check hostname
+hostnamectl set-hostname "new_name"
+sudo vim /etc/hosts //change hostname here, not sure why both is needed
+
+appt status
+sudo aa-status
+
+crontab for monitoring.sh
+sudo crontab -u root -e
+
+Why root cannot ssh into the machine
+vim /etc/ssh/sshd_config
+
